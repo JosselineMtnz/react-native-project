@@ -1,30 +1,52 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { auth } from "../utils/firebaseConfig";
+import { signOut } from "firebase/auth";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 const HomeScreen = ({ navigation }) => {
+  const [userEmail, setUserEmail] = useState("");
+
+  useEffect(() => {
+    if (auth.currentUser) {
+      setUserEmail(auth.currentUser.email);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        navigation.replace("Login");
+      })
+      .catch((error) => {
+        console.log("Error al cerrar sesión:", error.message);
+      });
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Bienvenido al Asilo Esperanza de Santa Ana</Text>
+      <View style={styles.welcomeContainer}>
+        <Icon name="person" size={80} color="black" style={styles.icon} />
+        <Text style={styles.welcomeText}>¡Bienvenido! </Text>
+        <Text style={styles.welcomeText}>{userEmail}</Text>
+      </View>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Pacientes')}
+        onPress={() => navigation.navigate("VerEventos")}
       >
-        <Text style={styles.buttonText}>Pacientes</Text>
+        <Text style={styles.buttonText}>Ver eventos</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Doctores')}
+        onPress={() => navigation.navigate("CrearEvento")}
       >
-        <Text style={styles.buttonText}>Doctores</Text>
+        <Text style={styles.buttonText}>Crear nuevo evento</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Citas')}
-      >
-        <Text style={styles.buttonText}>Citas</Text>
+      <TouchableOpacity style={styles.buttonSalir} onPress={handleLogout}>
+        <Text style={styles.buttonText}>Salir</Text>
       </TouchableOpacity>
     </View>
   );
@@ -33,28 +55,42 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 16,
-    backgroundColor: '#f5f5f5', // Fondo más claro
+    backgroundColor: "#f5f5f5",
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 30,
-    textAlign: 'center',
+  welcomeContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    marginBottom: 40,
+  },
+  icon: {
+    marginRight: 5,
+  },
+  welcomeText: {
+    fontSize: 20,
+    fontWeight: "600",
+    color: "#333",
   },
   button: {
-    backgroundColor: '#4CAF50', // Color verde
+    backgroundColor: "#4335A7",
     padding: 15,
     borderRadius: 10,
     marginVertical: 10,
-    width: '80%', // Ancho del botón
+    width: "80%",
+  },
+  buttonSalir: {
+    backgroundColor: "#FF2929",
+    padding: 15,
+    borderRadius: 10,
+    marginVertical: 10,
+    width: "80%",
   },
   buttonText: {
-    color: '#ffffff', // Color del texto
+    color: "#ffffff",
     fontSize: 18,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
 
