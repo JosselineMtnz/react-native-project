@@ -32,9 +32,19 @@ Esto es un proyecto realizado para la materia Diseño y Programación de Softwar
  npm start
 ```
 
+## Materia
+- Diseño y Programación de Software Multiplataforma DPS941 G01T
 
 ## Autores
 
 - Josseline Esmeralda Martínez Hernández MH180422 [@JosselineMtnz](https://github.com/JosselineMtnz)
 
 - Denilson Emmanuel Chávez Cruz [@DeccXD](https://github.com/DeccXD)
+
+##Links
+- Link Mockups: https://www.figma.com/proto/9W2HdnujySW9epvwF4vIO0/React-Native-Project-MockUps---DPS---App-%22PlanIt!%22?node-id=35-2&t=SrWJZb90y3v39HgU-1
+- Link Trello: https://trello.com/invite/b/67531a2b7cc948d6eaa7965b/ATTIb14592e6186b4f736d3c031429d849d90A23096A/proyecto-gestion-de-eventos
+
+
+## Licencias Creative Commons
+-  Gestion de eventos comunitarios © 2024 by Josseline Esmeralda Martínez Hernández Denilson Emmanuel Chávez Cruz is licensed under Creative Commons Attribution-NoDerivatives 4.0 International
