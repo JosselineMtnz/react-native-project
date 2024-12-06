@@ -44,7 +44,7 @@ Esto es un proyecto realizado para la materia Diseño y Programación de Softwar
 ## Links
 - Link Mockups: https://www.figma.com/proto/9W2HdnujySW9epvwF4vIO0/React-Native-Project-MockUps---DPS---App-%22PlanIt!%22?node-id=35-2&t=SrWJZb90y3v39HgU-1
 - Link Trello: https://trello.com/invite/b/67531a2b7cc948d6eaa7965b/ATTIb14592e6186b4f736d3c031429d849d90A23096A/proyecto-gestion-de-eventos
-- Link del video: https://www.youtube.com/watch?v=omaDfYPhSjI
+- Link del video: https://www.youtube.com/watch?v=n2dTQa4XFnw
 
 
 ## Licencias Creative Commons
