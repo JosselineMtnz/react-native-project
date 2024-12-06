@@ -1,6 +1,6 @@
-import React from 'react'; 
-import { NavigationContainer } from '@react-navigation/native';
-import RootNavigator from './navigation/RootNavigator'; // Root Navigator decides between Auth and App flows
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import RootNavigator from "./navigation/RootNavigator";
 
 const App = () => {
   return (

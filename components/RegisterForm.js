@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { auth } from "../utils/firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -31,6 +32,7 @@ const RegisterForm = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Registrate</Text>
+      <Image source={require("../assets/logo.png")} style={styles.logo} />
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Correo Electrónico</Text>
         <TextInput
@@ -77,6 +79,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 30,
     color: "#333",
+  },
+  logo: {
+    width: 300,
+    height: 90,
+    marginBottom: 30,
   },
   inputContainer: {
     width: "100%",

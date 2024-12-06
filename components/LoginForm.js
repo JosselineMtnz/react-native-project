@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { auth } from "../utils/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -20,7 +21,7 @@ const LoginForm = () => {
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        Alert.alert("Bienvenido a PlanIt!");
+        Alert.alert("¡Bienvenido a PlanIt!");
       })
       .catch((error) => {
         Alert.alert(error.message);
@@ -30,6 +31,9 @@ const LoginForm = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Iniciar Sesión</Text>
+
+      {/* Logo de la aplicación */}
+      <Image source={require("../assets/logo.png")} style={styles.logo} />
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Correo Electrónico</Text>
         <TextInput
@@ -70,6 +74,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     justifyContent: "center",
     flex: 1,
+  },
+  logo: {
+    width: 300,
+    height: 90,
+    marginBottom: 30,
   },
   title: {
     fontSize: 28,

@@ -8,13 +8,12 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../utils/firebaseConfig";
 
 const VerEventos = () => {
   const [eventos, setEventos] = useState([]);
 
-  // Leer todos los eventos al montar la pantalla
   useEffect(() => {
     obtenerEventos();
   }, []);
@@ -37,6 +36,22 @@ const VerEventos = () => {
     Alert.alert("Detalles del Evento", descripcion);
   };
 
+  const handleEliminar = async (eventoId) => {
+    try {
+      await deleteDoc(doc(db, "eventos", eventoId));
+      setEventos((prevEventos) =>
+        prevEventos.filter((evento) => evento.id !== eventoId)
+      );
+      Alert.alert(
+        "Evento eliminado",
+        "El evento ha sido eliminado exitosamente."
+      );
+    } catch (error) {
+      console.error("Error al eliminar evento: ", error);
+      Alert.alert("Error", "No se pudo eliminar el evento.");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Eventos Disponibles</Text>
@@ -45,11 +60,10 @@ const VerEventos = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.eventCard}>
-            {/* Mostrar la imagen si existe en el campo 'imagen' */}
             {item.imagen ? (
               <Image source={{ uri: item.imagen }} style={styles.image} />
             ) : (
-              <View style={styles.noImage}></View> // Si no hay imagen, mostrar un contenedor vacío
+              <View style={styles.noImage}></View>
             )}
             <View style={styles.infoContainer}>
               {/* Nombre del evento */}
@@ -64,6 +78,13 @@ const VerEventos = () => {
                 onPress={() => handleVerMas(item)}
               >
                 <Text style={styles.moreButtonText}>Ver Más</Text>
+              </TouchableOpacity>
+              {/* Botón de Eliminar */}
+              <TouchableOpacity
+                style={styles.deleteButton}
+                onPress={() => handleEliminar(item.id)}
+              >
+                <Text style={styles.deleteButtonText}>Eliminar</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -107,7 +128,7 @@ const styles = StyleSheet.create({
   noImage: {
     width: 80,
     height: 80,
-    backgroundColor: "#e0e0e0", // Color de fondo si no hay imagen
+    backgroundColor: "#e0e0e0",
     borderRadius: 8,
     marginRight: 12,
   },
@@ -134,6 +155,19 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   moreButtonText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  deleteButton: {
+    backgroundColor: "#FF0000",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 5,
+    marginTop: 10,
+    alignSelf: "flex-start",
+  },
+  deleteButtonText: {
     color: "#fff",
     fontSize: 14,
     fontWeight: "bold",
