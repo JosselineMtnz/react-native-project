@@ -16,7 +16,7 @@ const HomeScreen = ({ navigation }) => {
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        navigation.replace("Login");
+        navigation.navigate("Login");
       })
       .catch((error) => {
         console.log("Error al cerrar sesión:", error.message);
@@ -33,14 +33,14 @@ const HomeScreen = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("VerEventos")}
+        onPress={() => navigation.navigate("Eventos")}
       >
         <Text style={styles.buttonText}>Ver eventos</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("CrearEvento")}
+        onPress={() => navigation.navigate("NuevoEvento")}
       >
         <Text style={styles.buttonText}>Crear nuevo evento</Text>
       </TouchableOpacity>
